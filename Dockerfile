@@ -1,5 +1,5 @@
 # Используйте базовый образ Python
-FROM python:3.9
+FROM python:3.8-alpine
 
 # Установка переменной окружения для запуска внутри контейнера
 ENV PYTHONUNBUFFERED 1
