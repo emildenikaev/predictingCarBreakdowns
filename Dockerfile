@@ -1,5 +1,5 @@
 # Используйте базовый образ Python
-FROM python:3.9-slim
+FROM python:3.8-slim
 
 # Установка переменной окружения для запуска внутри контейнера
 ENV PYTHONUNBUFFERED 1
