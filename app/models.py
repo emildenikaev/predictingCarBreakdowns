@@ -10,11 +10,6 @@ from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 
 
-def model_predict(number_1, date, class_1, period):
-    predictions = (number for number in range(number_1))
-    print('predictions')
-    return predictions
-
 
 def preprocess(data: list) -> pd.DataFrame:
 
@@ -81,11 +76,21 @@ def preprocess(data: list) -> pd.DataFrame:
     return df.fillna(-9999)
 
 
-X_test = df_test.drop(["wagnum", "target_month", "target_day"], axis=1)
+# ------------------------------Models----------------------------------------
 
-preds_month = np.zeros(X_test.shape[0])
-preds_day = np.zeros(X_test.shape[0])
+def model_prediction():
+    X_test = df_test.drop(["wagnum", "target_month", "target_day"], axis=1)
 
-for model_m, model_d in zip(models_month, models_day):
-    preds_month += model_m.predict(X_test) / len(models_month)
-    preds_day += model_d.predict(X_test) / len(models_month)
+    preds_month = np.zeros(X_test.shape[0])
+    preds_day = np.zeros(X_test.shape[0])
+
+    for model_m, model_d in zip(models_month, models_day):
+        preds_month += model_m.predict(X_test) / len(models_month)
+        preds_day += model_d.predict(X_test) / len(models_month)
+
+
+
+def model_predict(number_1, date, class_1, period):
+    predictions = (number for number in range(number_1))
+    print('predictions')
+    return predictions
