@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
-from sklearn.model_selection import train_test_split, KFold
-from sklearn.metrics import f1_score, roc_auc_score
+#from sklearn.model_selection import train_test_split, KFold
+#from sklearn.metrics import f1_score, roc_auc_score
 from sklearn.calibration import CalibratedClassifierCV
 
 from catboost import CatBoostClassifier
@@ -60,7 +59,6 @@ def preprocess(data: list) -> pd.DataFrame:
         how="left"
     )
 
-
     df["days_from_dep"] = (df["month"] - df["date_dep"]).dt.days
     df["days_from_kap"] = (df["month"] - df["date_kap"]).dt.days
     df["days_from_build"] = (df["month"] - df["date_build"]).dt.days
@@ -87,7 +85,6 @@ def model_prediction():
     for model_m, model_d in zip(models_month, models_day):
         preds_month += model_m.predict(X_test) / len(models_month)
         preds_day += model_d.predict(X_test) / len(models_month)
-
 
 
 def model_predict(number_1, date, class_1, period):
